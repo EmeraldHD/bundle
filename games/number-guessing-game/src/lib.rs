@@ -1,8 +1,7 @@
 use std::cmp::Ordering;
 
 pub struct GuessingGame {
-    #[allow(dead_code)]
-    player: String,
+    _player: String,
     secret: i32,
 }
 
@@ -15,7 +14,10 @@ pub enum GuessResult {
 
 impl GuessingGame {
     pub fn new(player: String) -> Self {
-        Self { player, secret: 42 }
+        Self {
+            _player: player,
+            secret: 42,
+        }
     }
     pub fn guess(&self, number: i32) -> GuessResult {
         match number.cmp(&self.secret) {
