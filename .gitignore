@@ -4,6 +4,4 @@
 !.gitignore
 !.pre-commit-config.yaml
 
-/Cargo.lock
-
 /target/
