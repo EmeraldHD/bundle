@@ -5,6 +5,6 @@ edition = "2021"
 
 [dependencies]
 ping-module = { path = "../modules/ping-module" }
-dotenv = "0.15.0"
-tokio = { version = "1.26.0", features = ["macros", "rt-multi-thread", "signal"] }
-tranquil = "0.2.0"
+dotenv = { workspace = true }
+tokio = { workspace = true }
+tranquil = { workspace = true }
