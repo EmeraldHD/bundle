@@ -1,0 +1,5 @@
+commands:
+  ping:
+    description:
+      de: Schaue ob der Bot noch lebt
+      en-US: See if the bot is still alive

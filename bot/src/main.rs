@@ -1,42 +1,16 @@
-use serenity::model::id::GuildId;
 use tranquil::{
-    bot::{ApplicationCommandUpdate, Bot},
+    bot::Bot,
+    utils::{debug_guilds_from_env, discord_token_from_env},
     AnyResult,
 };
-
-fn env_var(token: &str) -> Result<String, std::env::VarError> {
-    std::env::var(token).map_err(|err| {
-        eprintln!("{err}: {token}");
-        err
-    })
-}
 
 #[tokio::main]
 async fn main() -> AnyResult<()> {
     dotenv::dotenv().ok();
 
-    let bot = Bot::new()
-        .application_command_update(
-            std::env::var("DEBUG_GUILDS")
-                .map(|var| {
-                    Some(ApplicationCommandUpdate::Only(
-                        var.split(',')
-                            .map(|guild| GuildId(guild.trim().parse::<u64>().unwrap()))
-                            .collect(),
-                    ))
-                })
-                .unwrap_or_else(|_| Some(ApplicationCommandUpdate::default())),
-        )
-        .register(ping_module::PingModule::new())
-        .run(env_var("DISCORD_TOKEN")?);
-
-    tokio::select! {
-        result = bot => if let Err(error) = result {
-            eprintln!("{error}");
-            Err("runtime error")?
-        },
-        result = tokio::signal::ctrl_c() => result?,
-    }
-
-    Ok(())
+    Bot::new()
+        .application_command_update(debug_guilds_from_env()?)
+        .register(ping_module::PingModule::new())?
+        .run_until_ctrl_c(discord_token_from_env()?)
+        .await
 }

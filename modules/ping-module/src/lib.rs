@@ -1,6 +1,10 @@
+use async_trait::async_trait;
 use tokio::sync::RwLock;
 use tranquil::{
-    command::CommandContext, command_provider, l10n::CommandL10nProvider, module::Module, slash,
+    command::CommandContext,
+    l10n::{CommandL10nProvider, L10n, L10nLoadError},
+    macros::{command_provider, slash},
+    module::Module,
     AnyResult,
 };
 
@@ -15,9 +19,10 @@ impl PingModule {
     }
 }
 
+#[async_trait]
 impl CommandL10nProvider for PingModule {
-    fn translations_filepath(&self) -> &'static str {
-        "l10n/ping-module.toml"
+    async fn l10n(&self) -> Result<L10n, L10nLoadError> {
+        L10n::from_yaml_file("l10n/ping-module.yaml").await
     }
 }
 
@@ -26,14 +31,13 @@ impl Module for PingModule {}
 #[command_provider]
 impl PingModule {
     #[slash]
-    async fn ping(&self, command: CommandContext, _dummy: Option<bool>) -> AnyResult<()> {
-        // TODO: _dummy parameter, because slash macro is bugged and requires at least one parameter...
+    async fn ping(&self, command: CommandContext) -> AnyResult<()> {
         let mut ping_count = self.ping_count.write().await;
         *ping_count += 1;
         let ping_count = ping_count.downgrade();
         command
             .interaction
-            .create_interaction_response(&command.ctx.http, |response| {
+            .create_interaction_response(&command.bot.http, |response| {
                 response.interaction_response_data(|data| {
                     data.embed(|embed| {
                         embed.title("Pong").field(
