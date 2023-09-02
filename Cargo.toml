@@ -1,5 +1,5 @@
 [workspace]
-members = ["bot", "games/*", "modules/*"]
+members = ["bot", "modules/*"]
 resolver = "2"
 default-members = ["bot"]
 
