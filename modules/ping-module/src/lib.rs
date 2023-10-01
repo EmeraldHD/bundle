@@ -1,11 +1,11 @@
+use anyhow::Result;
 use async_trait::async_trait;
 use tokio::sync::RwLock;
 use tranquil::{
-    command::CommandContext,
-    l10n::{CommandL10nProvider, L10n, L10nLoadError},
+    context::CommandCtx,
+    l10n::{L10n, L10nLoadError},
     macros::{command_provider, slash},
     module::Module,
-    AnyResult,
 };
 
 #[derive(Default)]
@@ -20,18 +20,16 @@ impl PingModule {
 }
 
 #[async_trait]
-impl CommandL10nProvider for PingModule {
+impl Module for PingModule {
     async fn l10n(&self) -> Result<L10n, L10nLoadError> {
         L10n::from_yaml_file("l10n/ping-module.yaml").await
     }
 }
 
-impl Module for PingModule {}
-
 #[command_provider]
 impl PingModule {
     #[slash]
-    async fn ping(&self, command: CommandContext) -> AnyResult<()> {
+    async fn ping(&self, command: CommandCtx) -> Result<()> {
         let mut ping_count = self.ping_count.write().await;
         *ping_count += 1;
         let ping_count = ping_count.downgrade();
