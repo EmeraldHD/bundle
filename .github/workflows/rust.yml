@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: clippy
         run: cargo clippy --workspace --all-targets --verbose -- -D warnings
       - name: build
@@ -26,6 +26,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: fmt
         run: cargo fmt --all --check
