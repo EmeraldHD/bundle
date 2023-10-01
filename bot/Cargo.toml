@@ -9,4 +9,5 @@ dotenvy = { workspace = true }
 tokio = { workspace = true }
 tranquil = { workspace = true }
 
+music-quiz-module = { path = "../modules/music-quiz-module" }
 ping-module = { path = "../modules/ping-module" }

@@ -11,6 +11,7 @@ async fn main() -> Result<()> {
     Bot::new()
         .application_command_update(debug_guilds_from_env()?)
         .register(ping_module::PingModule::new())
+        .register(music_quiz_module::MusicQuizModule::new())
         .run_until_ctrl_c(discord_token_from_env()?)
         .await
 }
