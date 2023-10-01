@@ -4,7 +4,9 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-ping-module = { path = "../modules/ping-module" }
+anyhow = { workspace = true }
 dotenv = { workspace = true }
 tokio = { workspace = true }
 tranquil = { workspace = true }
+
+ping-module = { path = "../modules/ping-module" }
