@@ -9,4 +9,5 @@ dotenvy = { workspace = true }
 tokio = { workspace = true }
 tranquil = { workspace = true }
 
+db = { path = "../backend/db" }
 ping-module = { path = "../modules/ping-module" }

@@ -1,12 +1,18 @@
 [workspace]
-members = ["bot", "modules/*"]
+members = ["bot", "modules/*", "backend/*"]
 resolver = "2"
 default-members = ["bot"]
 
 [workspace.dependencies]
 anyhow = "1.0.75"
 async-trait = "0.1.73"
+diesel = { version = "2.1.0", features = [
+    "sqlite",
+    "returning_clauses_for_sqlite_3_35",
+] }
+diesel_migrations = "2.1.0"
 dotenvy = "0.15.0"
+libsqlite3-sys = { version = ">=0.17.2, <0.27.0", features = ["bundled"] }
 thiserror = "1.0.48"
 tokio = { version = "1.32.0", features = [
     "macros",
