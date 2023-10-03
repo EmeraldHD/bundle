@@ -6,7 +6,7 @@ use tranquil::{
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    dotenv::dotenv().ok();
+    dotenvy::dotenv().ok();
 
     Bot::new()
         .application_command_update(debug_guilds_from_env()?)
