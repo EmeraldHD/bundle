@@ -13,4 +13,4 @@ tokio = { version = "1.33.0", features = [
     "rt-multi-thread",
     "signal",
 ] }
-tranquil = { git = "https://github.com/Possseidon/tranquil", rev = "b592fc11adedc4600703a504853aff78f8b97f26" }
+tranquil = { git = "https://github.com/Possseidon/tranquil", rev = "8202ffd7d17dbfe90706624d6d67e5d35e6c0b6c" }
