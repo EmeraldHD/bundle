@@ -6,11 +6,11 @@ default-members = ["bot"]
 [workspace.dependencies]
 anyhow = "1.0.75"
 async-trait = "0.1.73"
-dotenvy = "0.15.0"
-thiserror = "1.0.48"
-tokio = { version = "1.32.0", features = [
+dotenvy = "0.15.7"
+thiserror = "1.0.49"
+tokio = { version = "1.33.0", features = [
     "macros",
     "rt-multi-thread",
     "signal",
 ] }
-tranquil = { git = "https://github.com/Possseidon/tranquil", rev = "e7e86617503ac0d37901a37044049dc2790d207e" }
+tranquil = { git = "https://github.com/Possseidon/tranquil", rev = "8202ffd7d17dbfe90706624d6d67e5d35e6c0b6c" }
