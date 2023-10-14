@@ -10,7 +10,7 @@ async fn main() -> Result<()> {
 
     Bot::new()
         .application_command_update(debug_guilds_from_env()?)
-        .register(ping_module::PingModule::new())
+        .register(ping_module::PingModule)
         .run_until_ctrl_c(discord_token_from_env()?)
         .await
 }
