@@ -1,0 +1,7 @@
+commands:
+  guess:
+    name:
+      de: rate
+    description:
+      de: Rate mal!
+      en-US: Take a guess!
